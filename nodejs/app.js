@@ -5,17 +5,19 @@ const session = require("express-session");
 
 const app = express();
 
-const CAS_SERVER = "https://localhost:8443/cas";
+const CAS_SERVER = "https://anwar-dev.internal:8443/cas";
 const SERVICE_URL = "http://localhost:3000";
 
 const httpsAgent = new https.Agent({ rejectUnauthorized: false });
 
-app.use(session({
-  secret: "dev-secret",
-  resave: false,
-  saveUninitialized: false,
-  cookie: { maxAge: 60 * 60 * 1000 } // 1 jam (session lokal app)
-}));
+app.use(
+  session({
+    secret: "dev-secret",
+    resave: false,
+    saveUninitialized: false,
+    cookie: { maxAge: 60 * 60 * 1000 }, // 1 jam (session lokal app)
+  }),
+);
 
 app.get("/", async (req, res) => {
   // sudah punya session → tidak perlu validasi lagi
@@ -34,8 +36,7 @@ app.get("/", async (req, res) => {
   }
 
   try {
-    const validateUrl =
-      `${CAS_SERVER}/p3/serviceValidate?service=${encodeURIComponent(SERVICE_URL)}&ticket=${encodeURIComponent(ticket)}`;
+    const validateUrl = `${CAS_SERVER}/p3/serviceValidate?service=${encodeURIComponent(SERVICE_URL)}&ticket=${encodeURIComponent(ticket)}`;
 
     const response = await axios.get(validateUrl, { httpsAgent });
     const data = response.data;
