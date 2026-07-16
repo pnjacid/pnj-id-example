@@ -33,10 +33,10 @@ type sessionStore struct {
 }
 
 func main() {
-	casServer := env("CAS_SERVER", "https://anwar-dev.internal:8443/cas")
+	casServer := env("CAS_SERVER", "https://id.pnj.ac.id/cas")
 	serviceURL := env("SERVICE_URL", "http://localhost:3001")
 	listenAddr := env("LISTEN_ADDR", ":3001")
-	skipTLSVerify, err := strconv.ParseBool(env("CAS_INSECURE_SKIP_VERIFY", "true"))
+	skipTLSVerify, err := strconv.ParseBool(env("CAS_INSECURE_SKIP_VERIFY", "false"))
 	if err != nil {
 		log.Fatalf("invalid CAS_INSECURE_SKIP_VERIFY: %v", err)
 	}
