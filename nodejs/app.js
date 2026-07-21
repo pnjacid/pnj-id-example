@@ -5,7 +5,7 @@ const session = require("express-session");
 
 const app = express();
 
-const CAS_SERVER = "https://anwar-dev.internal:8443/cas";
+const CAS_SERVER = "https://id.pnj.ac.id/cas";
 const SERVICE_URL = "http://localhost:3000";
 
 const httpsAgent = new https.Agent({ rejectUnauthorized: false });
