@@ -1,0 +1,125 @@
+############################################
+# OPERATING SYSTEMS
+############################################
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+Icon?
+._*
+.DocumentRevisions-V100/
+.fseventsd/
+.Spotlight-V100/
+.TemporaryItems/
+.Trashes/
+.VolumeIcon.icns
+.com.apple.timemachine.donotpresent
+
+# Windows
+Thumbs.db
+Thumbs.db:encryptable
+ehthumbs.db
+ehthumbs_vista.db
+Desktop.ini
+$RECYCLE.BIN/
+*.stackdump
+
+# Linux
+*~
+.directory
+.Trash-*/
+.nfs*
+
+############################################
+# IDE / EDITORS
+############################################
+
+# JetBrains (GoLand, IntelliJ IDEA, Fleet, etc.)
+.idea/
+.fleet/
+*.iws
+*.iml
+*.ipr
+
+# Visual Studio Code / Visual Studio
+.vscode/
+.vs/
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# Eclipse
+.classpath
+.project
+.settings/
+
+# NetBeans
+nbproject/private/
+nbbuild/
+nbdist/
+
+# Vim / Neovim
+*.swp
+*.swo
+*.swn
+Session.vim
+.netrwhist
+
+# Emacs
+\#*\#
+.#*
+
+# Sublime Text / Zed / Kate / local history
+*.sublime-workspace
+.history/
+.zed/
+*.kate-swp
+
+############################################
+# GO
+############################################
+
+# Compiled binaries and build output
+bin/
+dist/
+build/
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+*.test
+
+# Test, coverage, profiling, and fuzzing output
+coverage.out
+coverage.html
+*.coverprofile
+*.prof
+*.trace
+test-results/
+
+# Workspace and dependency output
+vendor/
+go.work
+go.work.sum
+
+############################################
+# LOCAL / TEMPORARY FILES
+############################################
+
+*.log
+*.pid
+.env
+.env.*
+!.env.example
+tmp/
+temp/
+*.tmp
+*.temp
+*.bak
+*.orig
+
+# Keep module checksums tracked for reproducible builds.
+!go.sum

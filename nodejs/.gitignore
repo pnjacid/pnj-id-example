@@ -1,0 +1,136 @@
+############################################
+# OPERATING SYSTEMS
+############################################
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+Icon?
+._*
+.DocumentRevisions-V100/
+.fseventsd/
+.Spotlight-V100/
+.TemporaryItems/
+.Trashes/
+.VolumeIcon.icns
+.com.apple.timemachine.donotpresent
+
+# Windows
+Thumbs.db
+Thumbs.db:encryptable
+ehthumbs.db
+ehthumbs_vista.db
+Desktop.ini
+$RECYCLE.BIN/
+*.stackdump
+
+# Linux
+*~
+.directory
+.Trash-*/
+.nfs*
+
+############################################
+# IDE / EDITORS
+############################################
+
+# JetBrains (IntelliJ IDEA, WebStorm, Fleet, etc.)
+.idea/
+.fleet/
+*.iws
+*.iml
+*.ipr
+
+# Visual Studio Code / Visual Studio
+.vscode/
+.vs/
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# Eclipse / Spring Tool Suite
+.apt_generated/
+.apt_generated_tests/
+.classpath
+.factorypath
+.project
+.settings/
+.springBeans
+.sts4-cache/
+
+# NetBeans
+nbproject/private/
+nbbuild/
+nbdist/
+
+# Vim / Neovim
+*.swp
+*.swo
+*.swn
+Session.vim
+.netrwhist
+
+# Emacs
+\#*\#
+.#*
+
+# Sublime Text / Zed / Kate / local history
+*.sublime-workspace
+.history/
+.zed/
+*.kate-swp
+
+############################################
+# NODE.JS
+############################################
+
+node_modules/
+jspm_packages/
+
+# Build and test output
+dist/
+build/
+coverage/
+.nyc_output/
+*.lcov
+
+# Framework and tool caches
+.cache/
+.parcel-cache/
+.eslintcache
+.stylelintcache
+.npm/
+.yarn/cache/
+.yarn/unplugged/
+.pnpm-store/
+.node_repl_history
+
+# Runtime data and logs
+logs/
+*.log
+*.pid
+*.pid.lock
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Local environment files
+.env
+.env.*
+!.env.example
+
+# Temporary and backup files
+tmp/
+temp/
+*.tmp
+*.temp
+*.bak
+*.orig
+
+# Keep dependency lockfiles tracked for reproducible installs.
+!package-lock.json
+!yarn.lock
+!pnpm-lock.yaml

@@ -1,0 +1,120 @@
+############################################
+# OS FILES
+############################################
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+Icon?
+._*
+.DocumentRevisions-V100/
+.fseventsd/
+.Spotlight-V100/
+.TemporaryItems/
+.Trashes/
+.VolumeIcon.icns
+.com.apple.timemachine.donotpresent
+
+# Windows
+Thumbs.db
+Thumbs.db:encryptable
+ehthumbs.db
+ehthumbs_vista.db
+Desktop.ini
+$RECYCLE.BIN/
+*.stackdump
+
+# Linux
+*~
+.directory
+.Trash-*/
+.nfs*
+
+############################################
+# IDE / EDITOR
+############################################
+
+# JetBrains (IntelliJ IDEA, GoLand, WebStorm, Fleet, etc.)
+.idea/
+.fleet/
+*.iws
+*.iml
+*.ipr
+
+# Visual Studio Code / Visual Studio
+.vscode/
+.vs/
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# Eclipse / Spring Tool Suite
+.apt_generated/
+.apt_generated_tests/
+.classpath
+.factorypath
+.project
+.settings/
+.springBeans
+.sts4-cache/
+
+# NetBeans
+nbproject/private/
+nbbuild/
+nbdist/
+.nb-gradle/
+
+# Vim / Neovim
+*.swp
+*.swo
+*.swn
+Session.vim
+.netrwhist
+
+# Emacs
+\#*\#
+.#*
+
+# Sublime Text and other editors
+*.sublime-workspace
+.history/
+.zed/
+*.kate-swp
+
+############################################
+# LOCAL / TEMPORARY FILES
+############################################
+
+*.tmp
+*.temp
+*.bak
+*.orig
+*.log
+*.pid
+.env
+.env.*
+!.env.example
+
+############################################
+# NODE.JS
+############################################
+
+node_modules/
+coverage/
+.nyc_output/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+############################################
+# GO
+############################################
+
+bin/
+vendor/
+*.test
+*.prof
+coverage.out
