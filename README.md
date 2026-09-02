@@ -5,8 +5,8 @@ Repository ini berisi contoh integrasi **Single Sign-On (SSO)** dengan
 
 | Client | Teknologi | URL lokal | Service registry |
 | --- | --- | --- | --- |
-| Node.js | Express | `http://localhost:3000` | `node-client-1002.json` |
-| Go | `net/http` | `http://localhost:3001` | `go-client-1005.json` |
+| Node.js | Express | `http://localhost:3000` | `1002-node-client.json` |
+| Go | `net/http` | `http://localhost:3001` | `1005-go-client.json` |
 
 Kedua contoh menggunakan CAS Protocol 3 untuk login, validasi service ticket,
 session lokal aplikasi, dan logout.
@@ -76,8 +76,8 @@ Jika repository `pnj-id-overlay` berada di sebelah repository ini, contoh
 service registry tersedia di:
 
 ```text
-../pnj-id-overlay/services/node-client-1002.json
-../pnj-id-overlay/services/go-client-1005.json
+../pnj-id-overlay/services/1002-node-client.json
+../pnj-id-overlay/services/1005-go-client.json
 ```
 
 Konfigurasi Node.js:
