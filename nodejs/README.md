@@ -62,7 +62,7 @@ Contoh file service di CAS:
 Jika CAS server menggunakan folder service registry:
 
 ```text
-/root/CodePNJ/sso/pnj-id-overlay/services
+/root/docker/pnj-id-overlay/services
 ```
 
 Pastikan file JSON untuk `localhost:3000` sudah ada di folder tersebut.
