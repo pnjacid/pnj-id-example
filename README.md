@@ -3,11 +3,11 @@
 Repository ini berisi contoh integrasi **Single Sign-On (SSO)** dengan
 [Apereo CAS](https://apereo.github.io/cas/) menggunakan tiga aplikasi client:
 
-| Client | Teknologi | URL lokal | Service registry |
-| --- | --- | --- | --- |
+| Client | Teknologi | URL lokal               | Service registry |
+| --- | --- |-------------------------| --- |
 | Node.js | Express | `http://localhost:3000` | `1002-node-client.json` |
 | Go | `net/http` | `http://localhost:3001` | `1005-go-client.json` |
-| PHP | Built-in CLI server | `http://localhost:3002` | `1015-php-client.json` |
+| PHP | Built-in CLI server | `http://localhost:8081` | `1015-php-client.json` |
 
 Ketiga contoh menggunakan CAS Protocol 3 untuk login, validasi service ticket,
 session lokal aplikasi, dan logout.
@@ -114,7 +114,7 @@ Konfigurasi PHP:
 ```json
 {
   "@class": "org.apereo.cas.services.CasRegisteredService",
-  "serviceId": "^http://localhost:3002(/.*)?$",
+  "serviceId": "^http://localhost:8081(/.*)?$",
   "name": "PHP Client",
   "id": 1015
 }
@@ -183,25 +183,25 @@ Masuk ke direktori PHP dan jalankan built-in web server:
 
 ```bash
 cd php
-php -S 0.0.0.0:3002 index.php
+php -S 0.0.0.0:8081 index.php
 ```
 
-Buka <http://localhost:3002>. Client PHP dapat dikonfigurasi melalui environment
+Buka <http://localhost:8081>. Client PHP dapat dikonfigurasi melalui environment
 variable:
 
-| Variable | Nilai default | Keterangan |
-| --- | --- | --- |
+| Variable | Nilai default              | Keterangan |
+| --- |----------------------------| --- |
 | `CAS_SERVER` | `https://id.pnj.ac.id/cas` | Base URL server CAS |
-| `SERVICE_URL` | `http://localhost:3002` | URL client yang terdaftar di CAS |
-| `CAS_INSECURE_SKIP_VERIFY` | `false` | Lewati validasi TLS untuk development |
+| `SERVICE_URL` | `http://localhost:8081`    | URL client yang terdaftar di CAS |
+| `CAS_INSECURE_SKIP_VERIFY` | `false`                    | Lewati validasi TLS untuk development |
 
 Contoh menggunakan CAS lokal:
 
 ```bash
 CAS_SERVER="https://localhost:8443/cas" \
-SERVICE_URL="http://localhost:3002" \
+SERVICE_URL="http://localhost:8081" \
 CAS_INSECURE_SKIP_VERIFY="true" \
-php -S 0.0.0.0:3002 index.php
+php -S 0.0.0.0:8081 index.php
 ```
 
 ## Menguji SSO
@@ -209,7 +209,7 @@ php -S 0.0.0.0:3002 index.php
 1. Jalankan CAS dan pastikan service registry yang diuji sudah aktif.
 2. Jalankan client (Node.js, Go, atau PHP) pada terminal terpisah.
 3. Buka salah satu client (misalnya <http://localhost:3000>) dan login melalui CAS.
-4. Buka client lain (<http://localhost:3001> atau <http://localhost:3002>) pada browser yang sama.
+4. Buka client lain (<http://localhost:3001> atau <http://localhost:8081>) pada browser yang sama.
 5. CAS seharusnya mengenali session SSO sehingga pengguna tidak perlu mengisi
    kredensial lagi.
 6. Klik **Logout** untuk menghapus session lokal dan menuju endpoint logout CAS.
