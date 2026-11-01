@@ -48,15 +48,15 @@ Konfigurasi default sudah sesuai dengan provider OIDC yang digunakan oleh contoh
 Alur OIDC Authorization Code + PKCE berjalan seperti berikut:
 
 ```text
-Browser ── login ──► Client app ── redirect + PKCE ──► PNJ ID
-   ▲                                                    │
-   └──── callback + authorization code ─────────────────┘
-                            │
-Client app ── code + verifier ──► token endpoint PNJ ID
-   ▲                                      │
-   └──────────── token ───────────────────┘
-   │
-   └── session lokal ──► Browser
+Browser                  Client app                    PNJ ID
+   │── GET /auth/login ─────►│                            │
+   │◄── redirect + PKCE ─────│                            │
+   │── authorization request ────────────────────────────►│
+   │◄── redirect ke callback + authorization code ───────│
+   │── callback + code ─────►│                            │
+   │                         │── code + verifier ─────────►│
+   │                         │◄── token ──────────────────│
+   │◄── session lokal ───────│                            │
 ```
 
 1. Client app mengarahkan browser ke authorization endpoint PNJ ID dengan parameter PKCE.
