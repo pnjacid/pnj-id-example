@@ -28,30 +28,38 @@ type verifier struct {
 }
 
 func hasScope(claims map[string]any, required string) bool {
-	var scopes []string
 	switch value := claims["scope"].(type) {
 	case string:
-		scopes = strings.Fields(value)
-	case []any:
-		for _, scope := range value {
-			if text, ok := scope.(string); ok {
-				scopes = append(scopes, text)
+		for _, scope := range strings.Fields(value) {
+			if scope == required {
+				return true
 			}
 		}
-	}
-	for _, scope := range scopes {
-		if scope == required {
-			return true
+	case []any:
+		for _, scope := range value {
+			if scope == required {
+				return true
+			}
 		}
 	}
 	return false
 }
 
 func (v verifier) verifyAccessToken(ctx context.Context, token string) (map[string]any, error) {
+	var claims map[string]any
+	var err error
 	if strings.Count(token, ".") == 2 {
-		return v.verifyJWT(ctx, token)
+		claims, err = v.verifyJWT(ctx, token)
+	} else {
+		claims, err = v.introspect(ctx, token)
 	}
-	return v.introspect(ctx, token)
+	if err != nil {
+		return nil, err
+	}
+	if !hasScope(claims, requiredScope) {
+		return nil, fmt.Errorf("Token tidak memiliki scope %s", requiredScope)
+	}
+	return claims, nil
 }
 
 func (v verifier) verifyJWT(ctx context.Context, token string) (map[string]any, error) {
@@ -93,9 +101,6 @@ func (v verifier) verifyJWT(ctx context.Context, token string) (map[string]any, 
 	}
 	if notBefore, ok := claims["nbf"].(float64); ok && notBefore > now {
 		return nil, errors.New("Token belum aktif")
-	}
-	if !hasScope(claims, requiredScope) {
-		return nil, fmt.Errorf("Token tidak memiliki scope %s", requiredScope)
 	}
 	return claims, nil
 }
@@ -194,9 +199,6 @@ func (v verifier) introspect(ctx context.Context, token string) (map[string]any,
 	}
 	if claims["client_id"] != v.clientID {
 		return nil, errors.New("Token diterbitkan untuk client lain")
-	}
-	if !hasScope(claims, requiredScope) {
-		return nil, fmt.Errorf("Token tidak memiliki scope %s", requiredScope)
 	}
 	return claims, nil
 }

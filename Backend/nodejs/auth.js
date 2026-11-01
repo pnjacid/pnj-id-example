@@ -14,14 +14,19 @@ export function hasScope(payload, requiredScope) {
 }
 
 export async function verifyAccessToken(token) {
+  let payload;
   if (token.split('.').length === 3) {
-    const { payload } = await jwtVerify(token, jwks, { issuer });
-    if (!hasScope(payload, requiredScope)) {
-      throw new Error(`Token tidak memiliki scope ${requiredScope}`);
-    }
-    return payload;
+    const result = await jwtVerify(token, jwks, { issuer });
+    payload = result.payload;
+  } else {
+    payload = await introspect(token);
   }
 
+  if (!hasScope(payload, requiredScope)) throw new Error(`Token tidak memiliki scope ${requiredScope}`);
+  return payload;
+}
+
+async function introspect(token) {
   const clientSecret = process.env.OIDC_CLIENT_SECRET;
   if (!clientSecret) throw new Error('OIDC_CLIENT_SECRET belum dikonfigurasi');
 
@@ -41,6 +46,5 @@ export async function verifyAccessToken(token) {
   const payload = await response.json();
   if (!payload.active) throw new Error('Token tidak aktif');
   if (payload.client_id !== clientId) throw new Error('Token diterbitkan untuk client lain');
-  if (!hasScope(payload, requiredScope)) throw new Error(`Token tidak memiliki scope ${requiredScope}`);
   return payload;
 }
