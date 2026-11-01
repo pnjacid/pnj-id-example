@@ -29,8 +29,14 @@ Sebagai alternatif backend Node.js, gunakan Go 1.20 atau lebih baru:
 
 ```bash
 cd Backend/golang
+cp .env.example .env.dev
+set -a
+source .env.dev
+set +a
 go run .
 ```
+
+Sesuaikan nilai di `.env.dev` sebelum menjalankan backend. File ini diabaikan oleh Git agar konfigurasi lokal dan client secret tidak ikut tersimpan.
 
 ### Client app Node.js
 
