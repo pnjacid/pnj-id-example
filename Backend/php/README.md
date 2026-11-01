@@ -12,7 +12,7 @@ set +a
 php -S "127.0.0.1:${PORT:-90}" server.php
 ```
 
-Perintah di atas memakai Bash untuk memuat environment. PHP tidak memuat `.env.dev` secara otomatis. Port default 90 sama dengan contoh Node.js; gunakan port berbeda jika backend lain masih berjalan dan sesuaikan `BACKEND_URL` di frontend.
+Perintah di atas memakai Bash untuk memuat environment. PHP tidak memuat `.env.dev` secara otomatis. Pilih PHP sebagai satu-satunya backend pada port **90**; hentikan backend Node.js/Go sebelum menjalankannya agar tidak konflik. Pasangkan dengan satu frontend apa pun pada port **5173** menggunakan `BACKEND_URL=http://localhost:90`.
 
 - `GET /health` mengembalikan `{"status":"ok"}` tanpa token.
 - `GET /api/profile` memerlukan `Authorization: Bearer <access_token>` dan scope `test.read`.

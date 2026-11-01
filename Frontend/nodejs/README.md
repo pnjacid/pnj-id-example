@@ -1,5 +1,7 @@
 # Client OIDC Node.js
 
+Ini salah satu pilihan [frontend](../README.md). Jalankan frontend Node.js saja pada port **5173**, lalu pilih satu backend (Node.js, Go, atau PHP) pada port **90**. Hentikan frontend lain sebelum menjalankan contoh ini; pertahankan `BACKEND_URL=http://localhost:90`.
+
 Gunakan Node.js 22.12 atau lebih baru dan Redis 6.2 atau lebih baru. Jalankan `npm install`, salin `.env.example` ke `.env.dev`, isi konfigurasi, lalu `npm run dev`. Redis wajib tersedia, termasuk untuk development. Buka http://localhost:5173.
 
 ## Alur kode

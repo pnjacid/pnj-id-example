@@ -1,6 +1,8 @@
 # Backend contoh PNJ ID
 
-Backend ini adalah API (resource server). Login dilakukan oleh client app di `Frontend/nodejs`. Pilih salah satu backend: Node.js, Go, atau [PHP](php/README.md). Ketiganya menyediakan endpoint yang sama:
+Backend ini adalah API (resource server). Login dilakukan oleh salah satu [frontend](../Frontend/README.md): Node.js, Vue.js, atau Next.js. **Pilih dan jalankan satu backend saja**: Node.js, Go, atau [PHP](php/README.md), pada **http://localhost:90**. Hentikan backend sebelumnya sebelum mengganti implementasi agar port 90 tidak konflik.
+
+Backend dapat dipasangkan dengan frontend apa pun pada port 5173; tidak harus menggunakan bahasa yang sama. Ketiga backend menyediakan kontrak endpoint yang sama:
 
 | Endpoint | Fungsi |
 | --- | --- |
@@ -42,7 +44,7 @@ set +a
 go run .
 ```
 
-Server memakai port 90 secara default. Atur `PORT` pada `.env.dev` bila diperlukan; sesuaikan juga `BACKEND_URL` pada client app.
+Untuk percobaan standar, pertahankan `PORT=90` dan `BACKEND_URL=http://localhost:90` pada frontend. Pilih salah satu perintah menjalankan di atas atau ikuti [panduan PHP](php/README.md); jangan menjalankan semua backend sekaligus.
 
 ## Memeriksa contoh
 

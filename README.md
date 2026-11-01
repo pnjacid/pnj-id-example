@@ -17,6 +17,31 @@ Untuk meminta service SSO, buka tiket pada web [layanan.pnj.ac.id](https://layan
 
 ## Menjalankan
 
+### Pilih frontend dan backend terlebih dahulu
+
+Untuk mencoba alur lengkap, **pilih satu frontend dan satu backend**. Implementasi dalam masing-masing direktori adalah alternatif dengan fungsi dan kontrak API yang sama; Anda tidak perlu menjalankan semuanya.
+
+| Peran | Pilih satu | Alamat lokal |
+| --- | --- | --- |
+| Frontend/client app | Node.js, Vue.js, atau Next.js | `http://localhost:5173` |
+| Backend/resource server | Node.js, Go, atau PHP | `http://localhost:90` |
+
+Frontend dan backend bebas dipasangkan lintas bahasa/framework, misalnya Vue.js + PHP, Next.js + Go, atau Node.js + Node.js. Gunakan konfigurasi provider, client, scope, dan user yang sama untuk membandingkan hasil. Backend tidak harus menggunakan bahasa yang sama dengan frontend.
+
+**Jangan menjalankan dua frontend atau dua backend contoh sekaligus pada port yang sama.** Saat berganti contoh, hentikan frontend sebelumnya sebelum memakai port 5173 atau backend sebelumnya sebelum memakai port 90. Pertahankan `BACKEND_URL=http://localhost:90` dan `OIDC_REDIRECT_URI=http://localhost:5173/auth/callback` pada frontend yang dipilih. Mulai login baru setelah berganti frontend.
+
+Urutan mencoba:
+
+1. Pilih backend, isi `.env.dev` miliknya, lalu jalankan pada port 90.
+2. Pilih frontend, isi konfigurasi OIDC dan Redis, lalu jalankan sesuai README-nya. Redis diperlukan oleh server sesi frontend.
+3. Buka `http://localhost:5173`, masuk dengan PNJ ID, dan periksa profil termasuk email.
+4. Pilih **Lihat data test.read** untuk API PNJ atau **Periksa akses backend** untuk backend yang dipilih pada port 90.
+5. Pilih **Keluar** untuk mengakhiri sesi aplikasi dan SSO.
+
+Semua frontend menyediakan alur dan data tersebut meskipun tampilannya mengikuti framework masing-masing. Semua backend menyediakan `GET /health` dan `GET /api/profile` dengan pemeriksaan Bearer token dan scope `test.read`, serta hasil profil `message`, `subject`, `email`, dan `scope`. Email bergantung pada claim yang dikirim provider; tidak dibuat oleh contoh aplikasi.
+
+Lihat [panduan frontend](Frontend/README.md) dan [panduan backend](Backend/README.md). Bagian berikut menjelaskan cara menjalankan **pilihan Anda**, bukan langkah untuk menjalankan semua contoh.
+
 ### Backend Node.js
 
 Gunakan Node.js 20 atau lebih baru.
@@ -57,6 +82,10 @@ php -S "127.0.0.1:${PORT:-90}" server.php
 ```
 
 Detail alur dan pengujian tersedia di [Backend/php/README.md](Backend/php/README.md).
+
+### Client app Next.js
+
+Contoh Next.js App Router tersedia di [Frontend/nextjs](Frontend/nextjs/README.md). Next.js dan handler OIDC Node.js berjalan dalam satu proses pada port 5173; backend API tetap pada port 90. Ikuti README contoh tersebut untuk menjalankannya.
 
 ### Client app Vue.js
 

@@ -1,5 +1,7 @@
 # Client Vue PNJ ID
 
+Ini salah satu pilihan [frontend](../README.md). Pilih Vue saja untuk port **5173** dan satu backend (Node.js, Go, atau PHP) untuk port **90**. Hentikan frontend lain dan backend sebelumnya saat berganti pilihan. Server OIDC Node.js di bawah adalah proses internal Vue, bukan backend API pada port 90.
+
 Vue 3 menangani tampilan. Contoh ini memakai server OIDC di `../nodejs` untuk login Authorization Code + PKCE, validasi ID token, UserInfo, session Redis, proxy API, dan logout. Client secret dan token tidak disimpan di Vue atau localStorage.
 
 ## Menjalankan
@@ -30,7 +32,7 @@ npm run dev
 
 Buka **http://localhost:5173**. Vite memakai port 5173, sedangkan server OIDC memakai port 5174. Hentikan contoh Node.js yang memakai port 5173 terlebih dahulu. Redirect URI tetap `http://localhost:5173/auth/callback`; Vite meneruskan `/auth` dan `/api` ke server OIDC tanpa mengubah Origin, sehingga cookie sesi dan proteksi logout tetap bekerja.
 
-Jalankan salah satu contoh `Backend` untuk tombol **Periksa akses backend**, lalu sesuaikan `BACKEND_URL` bila port backend berbeda.
+Jalankan satu contoh `Backend` pada port 90 untuk tombol **Periksa akses backend**. Pertahankan `BACKEND_URL=http://localhost:90` pada `.env.dev`.
 
 ## Membaca kode
 
