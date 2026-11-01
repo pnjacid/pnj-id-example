@@ -58,6 +58,10 @@ php -S "127.0.0.1:${PORT:-90}" server.php
 
 Detail alur dan pengujian tersedia di [Backend/php/README.md](Backend/php/README.md).
 
+### Client app Vue.js
+
+Contoh Vue 3 tersedia di [Frontend/vuejs](Frontend/vuejs/README.md). Vue memakai server OIDC Node.js yang sama melalui proxy `/auth` dan `/api`, sehingga client secret dan token tetap berada di server. Ikuti README contoh tersebut untuk menjalankan server OIDC pada port 5174 dan Vue pada port 5173.
+
 ### Client app Node.js
 
 ```bash
