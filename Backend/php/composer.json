@@ -1,0 +1,14 @@
+{
+  "name": "pnj-id-example/backend",
+  "description": "Contoh resource server PNJ ID",
+  "type": "project",
+  "require": {
+    "php": ">=8.1",
+    "ext-curl": "*",
+    "ext-openssl": "*",
+    "firebase/php-jwt": "^6.11.1"
+  },
+  "scripts": {
+    "test": "php auth.test.php && php jwt.test.php"
+  }
+}

@@ -41,6 +41,23 @@ set +a
 go run .
 ```
 
+### Backend PHP
+
+Gunakan PHP 8.1 atau lebih baru, Composer, ekstensi cURL dan OpenSSL:
+
+```bash
+cd Backend/php
+composer install
+cp .env.example .env.dev
+# Isi .env.dev sebelum menjalankan server.
+set -a
+source .env.dev
+set +a
+php -S "127.0.0.1:${PORT:-90}" server.php
+```
+
+Detail alur dan pengujian tersedia di [Backend/php/README.md](Backend/php/README.md).
+
 ### Client app Node.js
 
 ```bash

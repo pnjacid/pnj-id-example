@@ -1,6 +1,6 @@
 # Backend contoh PNJ ID
 
-Backend ini adalah API (resource server). Login dilakukan oleh client app di `Frontend/nodejs`. Pilih salah satu backend: Node.js atau Go. Keduanya menyediakan endpoint yang sama:
+Backend ini adalah API (resource server). Login dilakukan oleh client app di `Frontend/nodejs`. Pilih salah satu backend: Node.js, Go, atau [PHP](php/README.md). Ketiganya menyediakan endpoint yang sama:
 
 | Endpoint | Fungsi |
 | --- | --- |
