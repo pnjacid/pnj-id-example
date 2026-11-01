@@ -181,6 +181,7 @@ TAGS
 **/.copilot/
 **/.tabnine/
 **/.skills/
+**/skills/
 
 # Temporary files
 **/tmp/
