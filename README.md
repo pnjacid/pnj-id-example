@@ -45,6 +45,18 @@ Konfigurasi default sudah sesuai dengan CAS service yang digunakan oleh contoh i
 
 ## Alur masuk dan akses API
 
+Sebagai gambaran, alur CAS berbasis ticket berjalan seperti berikut:
+
+```text
+Browser ──► Client ──► CAS Login
+   ▲                      │
+   └──── ticket ──────────┘
+   │
+Client ── serviceValidate ──► CAS
+   │
+   └── session lokal ──► Browser
+```
+
 1. Client app mengarahkan browser ke authorization endpoint PNJ ID dengan parameter PKCE.
 2. PNJ ID mengembalikan authorization code ke `http://localhost:5173/auth/callback`.
 3. Client app mengirim authorization code ke token endpoint untuk mendapatkan token, lalu mengambil data user, termasuk email, dari UserInfo endpoint.
