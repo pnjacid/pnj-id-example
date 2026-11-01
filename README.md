@@ -11,6 +11,10 @@ Nama direktori menunjukkan **peran dalam flow OIDC**, bukan aturan bahwa setiap 
 
 Contoh bahasa atau platform baru cukup ditempatkan berdasarkan perannya. Aplikasi web, mobile, desktop, atau CLI yang menangani login termasuk client app meskipun tidak memiliki "frontend". Setiap contoh juga tidak wajib memiliki kedua bagian: client app dapat langsung memanggil API PNJ, sedangkan resource server dapat dipakai oleh client mana pun.
 
+## Permintaan service SSO
+
+Untuk meminta service SSO, buka tiket pada web [layanan.pnj.ac.id](https://layanan.pnj.ac.id).
+
 ## Menjalankan
 
 ### Backend Node.js
