@@ -20,6 +20,7 @@ Gunakan Node.js 20 atau lebih baru.
 ```bash
 cd Backend/nodejs
 npm install
+cp .env.example .env.dev
 npm run dev
 ```
 
@@ -36,18 +37,17 @@ set +a
 go run .
 ```
 
-Sesuaikan nilai di `.env.dev` sebelum menjalankan backend. File ini diabaikan oleh Git agar konfigurasi lokal dan client secret tidak ikut tersimpan.
-
 ### Client app Node.js
 
 ```bash
 cd Frontend/nodejs
+cp .env.example .env.dev
 npm run dev
 ```
 
 Buka <http://localhost:5173>, lalu pilih **Masuk dengan PNJ ID**.
 
-Konfigurasi default sudah sesuai dengan provider OIDC yang digunakan oleh contoh ini. Salin `.env.example` hanya jika nilainya perlu diubah, lalu load environment variables menggunakan cara yang tersedia di sistem Anda.
+Sesuaikan nilai di setiap `.env.dev` sebelum menjalankan aplikasi. File ini diabaikan oleh Git agar konfigurasi lokal dan client secret tidak ikut tersimpan. Script `npm run dev` pada Backend dan Frontend Node.js memuat `.env.dev` secara otomatis.
 
 ## Alur masuk dan akses API
 
