@@ -45,8 +45,8 @@ function redirect(response, location) {
   response.end();
 }
 
-export function startServer(render) {
-  const server = createServer(async (request, response) => {
+export function createRequestHandler(render) {
+  return async (request, response) => {
     let stage = 'request';
     response.setHeader('cache-control', 'no-store');
     response.setHeader('x-content-type-options', 'nosniff');
@@ -140,13 +140,21 @@ export function startServer(render) {
       });
       return json(response, 503, { error: 'Layanan sementara tidak tersedia. Silakan coba lagi.' });
     }
-  });
+  };
+}
+
+export function closeSessionStore() {
+  redis.destroy();
+}
+
+export function startServer(render) {
+  const server = createServer(createRequestHandler(render));
   server.requestTimeout = 15000;
   server.headersTimeout = 10000;
   server.listen(port, () => console.log(`Frontend berjalan pada port ${port}`));
   for (const signal of ['SIGTERM', 'SIGINT']) {
     process.on(signal, () => {
-      server.close(() => { redis.destroy(); process.exit(0); });
+      server.close(() => { closeSessionStore(); process.exit(0); });
       setTimeout(() => process.exit(1), 10000).unref();
     });
   }

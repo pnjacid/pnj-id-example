@@ -23,7 +23,7 @@ Untuk mencoba alur lengkap, **pilih satu frontend dan satu backend**. Implementa
 
 | Peran | Pilih satu | Alamat lokal |
 | --- | --- | --- |
-| Frontend/client app | Node.js, Vue.js, atau Next.js | `http://localhost:5173` |
+| Frontend/client app | Node.js, Fastify.js, Vue.js, atau Next.js | `http://localhost:5173` |
 | Backend/resource server | Node.js, Go, atau PHP | `http://localhost:90` |
 
 Frontend dan backend bebas dipasangkan lintas bahasa/framework, misalnya Vue.js + PHP, Next.js + Go, atau Node.js + Node.js. Gunakan konfigurasi provider, client, scope, dan user yang sama untuk membandingkan hasil. Backend tidak harus menggunakan bahasa yang sama dengan frontend.
@@ -82,6 +82,10 @@ php -S "127.0.0.1:${PORT:-90}" server.php
 ```
 
 Detail alur dan pengujian tersedia di [Backend/php/README.md](Backend/php/README.md).
+
+### Client app Fastify.js
+
+Contoh Fastify 5 tersedia di [Frontend/fastifyjs](Frontend/fastifyjs/README.md). Fastify memakai handler dan halaman frontend Node.js yang sama dalam satu proses pada port 5173. Pilih Fastify sebagai satu-satunya frontend dan pasangkan dengan satu backend pada port 90.
 
 ### Client app Next.js
 

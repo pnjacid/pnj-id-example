@@ -4,7 +4,7 @@ import { readFile } from 'node:fs/promises';
 import { runInNewContext } from 'node:vm';
 
 const source = await readFile(new URL('./server.js', import.meta.url), 'utf8');
-const handlerSource = source.slice(source.indexOf('createServer(async'), source.indexOf('\n  server.requestTimeout')).trim().replace(/;$/, '');
+const handlerSource = source.slice(source.indexOf('  return async (request, response) => {') + '  return '.length, source.indexOf('\n}\n\nexport function closeSessionStore')).trim().replace(/;$/, '');
 
 test('shared server delegates Next pages and assets while retaining OIDC/API routes', async () => {
   const rendered = [];

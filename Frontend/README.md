@@ -5,10 +5,11 @@ Pilih **satu** contoh berikut dan jalankan pada **http://localhost:5173**:
 | Pilihan | Panduan |
 | --- | --- |
 | Node.js | [nodejs/README.md](nodejs/README.md) |
+| Fastify.js | [fastifyjs/README.md](fastifyjs/README.md) |
 | Vue.js | [vuejs/README.md](vuejs/README.md) |
 | Next.js | [nextjs/README.md](nextjs/README.md) |
 
-Hentikan frontend sebelumnya sebelum berganti contoh agar port 5173 tidak konflik. Vue dan Next.js memakai kode server OIDC dari direktori Node.js; menginstal dependency Node.js untuk keduanya tidak berarti Anda harus menjalankan frontend Node.js secara terpisah. Ikuti proses yang disebutkan README frontend pilihan Anda saja.
+Hentikan frontend sebelumnya sebelum berganti contoh agar port 5173 tidak konflik. Fastify, Vue dan Next.js memakai kode server OIDC dari direktori Node.js; menginstal dependency Node.js untuk contoh tersebut tidak berarti Anda harus menjalankan frontend Node.js secara terpisah. Ikuti proses yang disebutkan README frontend pilihan Anda saja.
 
 Pilih juga **satu** [backend](../Backend/README.md): Node.js, Go, atau PHP, pada **http://localhost:90**. Setiap frontend dapat dipasangkan dengan setiap backend; tidak harus berbahasa sama.
 
@@ -19,7 +20,7 @@ BACKEND_URL=http://localhost:90
 OIDC_REDIRECT_URI=http://localhost:5173/auth/callback
 ```
 
-Node.js, Vue.js, dan Next.js menggabungkan halaman dan handler OIDC pada port 5173. Jalankan perintah frontend pilihan Anda saja; tidak diperlukan proses OIDC tambahan pada port 5174.
+Node.js, Fastify, Vue.js, dan Next.js menggabungkan halaman dan handler OIDC pada port 5173. Jalankan perintah frontend pilihan Anda saja; tidak diperlukan proses OIDC tambahan pada port 5174.
 
 ## Hasil percobaan yang sama
 
