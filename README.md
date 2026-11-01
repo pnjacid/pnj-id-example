@@ -89,7 +89,7 @@ Contoh Next.js App Router tersedia di [Frontend/nextjs](Frontend/nextjs/README.m
 
 ### Client app Vue.js
 
-Contoh Vue 3 tersedia di [Frontend/vuejs](Frontend/vuejs/README.md). Vue memakai server OIDC Node.js yang sama melalui proxy `/auth` dan `/api`, sehingga client secret dan token tetap berada di server. Ikuti README contoh tersebut untuk menjalankan server OIDC pada port 5174 dan Vue pada port 5173.
+Contoh Vue 3 tersedia di [Frontend/vuejs](Frontend/vuejs/README.md). Vue dan handler OIDC Node.js berjalan dalam satu proses pada port 5173, sehingga client secret dan token tetap berada di server. Backend API tetap pada port 90.
 
 ### Client app Node.js
 

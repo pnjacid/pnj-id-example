@@ -19,7 +19,7 @@ BACKEND_URL=http://localhost:90
 OIDC_REDIRECT_URI=http://localhost:5173/auth/callback
 ```
 
-Vue menggunakan proses OIDC internal pada port 5174 sesuai README-nya. Proses ini bagian dari frontend, bukan backend resource server pada port 90. Browser tetap membuka port 5173. Node.js dan Next.js menggabungkan halaman dan handler OIDC pada port 5173.
+Node.js, Vue.js, dan Next.js menggabungkan halaman dan handler OIDC pada port 5173. Jalankan perintah frontend pilihan Anda saja; tidak diperlukan proses OIDC tambahan pada port 5174.
 
 ## Hasil percobaan yang sama
 
