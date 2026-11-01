@@ -1,6 +1,5 @@
 import { createServer } from 'node:http';
 import { readFile } from 'node:fs/promises';
-import { fileURLToPath } from 'node:url';
 import { codeChallenge, endSessionUrl, loadProvider, randomUrlSafe } from './oidc.js';
 
 const port = Number(process.env.PORT ?? 5173);
@@ -12,9 +11,9 @@ const backendUrl = process.env.BACKEND_URL ?? 'http://localhost:90';
 const testReadUrl = 'https://dev-api.pnj.ac.id/testread';
 const scopes = 'openid profile email test.read';
 const sessions = new Map();
-const indexHtml = await readFile(fileURLToPath(new URL('./public/index.html', import.meta.url)));
-const styles = await readFile(fileURLToPath(new URL('./public/styles.css', import.meta.url)));
-const appJs = await readFile(fileURLToPath(new URL('./public/app.js', import.meta.url)));
+const indexHtml = await readFile(new URL('./public/index.html', import.meta.url));
+const styles = await readFile(new URL('./public/styles.css', import.meta.url));
+const appJs = await readFile(new URL('./public/app.js', import.meta.url));
 let provider;
 
 function cookies(request) {
@@ -136,17 +135,10 @@ const server = createServer(async (request, response) => {
       return json(response, 200, { authenticated: true, user: currentSession.user });
     }
 
-    if (request.method === 'GET' && url.pathname === '/api/backend-profile') {
+    if (request.method === 'GET' && ['/api/backend-profile', '/api/test-read'].includes(url.pathname)) {
       if (!currentSession.accessToken) return json(response, 401, { error: 'Silakan masuk terlebih dahulu' });
-      const backendResponse = await fetch(`${backendUrl}/api/profile`, {
-        headers: { authorization: `Bearer ${currentSession.accessToken}` }
-      });
-      return json(response, backendResponse.status, await backendResponse.json());
-    }
-
-    if (request.method === 'GET' && url.pathname === '/api/test-read') {
-      if (!currentSession.accessToken) return json(response, 401, { error: 'Silakan masuk terlebih dahulu' });
-      const apiResponse = await fetch(testReadUrl, {
+      const apiUrl = url.pathname === '/api/test-read' ? testReadUrl : `${backendUrl}/api/profile`;
+      const apiResponse = await fetch(apiUrl, {
         headers: { authorization: `Bearer ${currentSession.accessToken}` }
       });
       return json(response, apiResponse.status, await apiResponse.json());

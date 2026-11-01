@@ -9,30 +9,31 @@
     <script src="/app.js" defer></script>
   </head>
   <body>
-    <header>
-      <a href="/">PNJ ID Example</a>
-    </header>
     <main id="main-content">
       <section aria-labelledby="page-title">
         <h1 id="page-title">Contoh integrasi OIDC</h1>
-        <p>Masuk dengan PNJ ID, lihat profil, lalu uji akses API.</p>
+        <p>Login dengan Authorization Code + PKCE, baca UserInfo, lalu panggil API dengan access token.</p>
 
         <div id="loading" class="state" role="status">Memeriksa sesi masuk...</div>
         <div id="error" class="state error" role="alert" hidden></div>
         <div id="signed-out" class="state" hidden>
           <p>Belum ada sesi aktif. Masuk untuk melihat data profil dari PNJ ID.</p>
-          <a class="button primary" href="/auth/login">Masuk dengan PNJ ID</a>
+          <a class="button" href="/auth/login">Masuk dengan PNJ ID</a>
         </div>
         <div id="signed-in" class="state" hidden>
-          <p class="status">Sesi aktif</p>
           <h2 id="user-name">Pengguna PNJ</h2>
-          <dl id="profile"></dl>
+          <p>Profil dari endpoint UserInfo PNJ ID.</p>
+          <dl id="profile">
+            <dt>Subject</dt><dd id="subject"></dd>
+            <dt>Email</dt><dd id="email"></dd>
+            <dt>Username</dt><dd id="username"></dd>
+          </dl>
           <div class="actions">
-            <button id="test-read" class="button primary" type="button">Lihat data test.read</button>
-            <button id="check-backend" class="button secondary" type="button">Periksa akses backend</button>
-            <button id="logout" class="button secondary" type="button">Keluar</button>
+            <button data-url="/api/test-read" type="button">Lihat data test.read</button>
+            <button data-url="/api/backend-profile" type="button">Periksa akses backend</button>
+            <button id="logout" type="button">Keluar</button>
           </div>
-          <pre id="backend-result" tabindex="0" hidden></pre>
+          <pre id="backend-result" aria-label="Respons API" tabindex="0" hidden></pre>
         </div>
       </section>
     </main>

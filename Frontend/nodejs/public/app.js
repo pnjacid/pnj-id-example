@@ -24,28 +24,23 @@ async function loadSession() {
 
     const user = session.user;
     document.querySelector('#user-name').textContent = user.name ?? user.preferred_username ?? 'Pengguna PNJ';
-    const fields = [['Subject', user.sub], ['Email', user.email ?? user.mail], ['Username', user.preferred_username ?? user.uid]];
-    document.querySelector('#profile').replaceChildren(...fields.filter(([, value]) => value).flatMap(([label, value]) => {
-      const term = document.createElement('dt');
-      const description = document.createElement('dd');
-      term.textContent = label;
-      description.textContent = value;
-      return [term, description];
-    }));
+    document.querySelector('#subject').textContent = user.sub ?? 'Tidak tersedia';
+    document.querySelector('#email').textContent = user.email || user.mail || 'Tidak dikirim oleh provider';
+    document.querySelector('#username').textContent = user.preferred_username ?? user.uid ?? 'Tidak tersedia';
     signedIn.hidden = false;
   } catch (error) {
     showError(error.message);
   }
 }
 
-async function showApiResult(event, url, loadingLabel) {
+async function showApiResult(event) {
   const button = event.currentTarget;
   const label = button.textContent;
   button.disabled = true;
-  button.textContent = loadingLabel;
+  button.textContent = 'Memuat data...';
   result.hidden = true;
   try {
-    const response = await fetch(url);
+    const response = await fetch(button.dataset.url);
     const body = await response.json();
     result.textContent = JSON.stringify(body, null, 2);
     result.hidden = false;
@@ -58,8 +53,7 @@ async function showApiResult(event, url, loadingLabel) {
   }
 }
 
-document.querySelector('#test-read').addEventListener('click', event => showApiResult(event, '/api/test-read', 'Memuat data...'));
-document.querySelector('#check-backend').addEventListener('click', event => showApiResult(event, '/api/backend-profile', 'Memeriksa akses...'));
+document.querySelectorAll('[data-url]').forEach(button => button.addEventListener('click', showApiResult));
 
 document.querySelector('#logout').addEventListener('click', async event => {
   event.currentTarget.disabled = true;
