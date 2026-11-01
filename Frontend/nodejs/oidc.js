@@ -1,22 +1,38 @@
-import { createHash, randomBytes } from 'node:crypto';
+import * as oidc from 'openid-client';
 
-export function randomUrlSafe(size = 32) {
-  return randomBytes(size).toString('base64url');
+export function pnjClientSecretBasic(secret) {
+  return (_metadata, client, _body, headers) => {
+    // PNJ ID compatibility: preserve the raw Basic credentials used by the original client.
+    headers.set('authorization', `Basic ${Buffer.from(`${client.client_id}:${secret}`).toString('base64')}`);
+  };
 }
 
-export function codeChallenge(verifier) {
-  return createHash('sha256').update(verifier).digest('base64url');
+export async function loadProvider(issuer, clientId, secret) {
+  if (!secret) throw new Error('OIDC_CLIENT_SECRET belum dikonfigurasi');
+  const config = await oidc.discovery(new URL(issuer), clientId, secret, pnjClientSecretBasic(secret), {
+    algorithm: 'oidc',
+    execute: [oidc.enableNonRepudiationChecks]
+  });
+  return config;
 }
 
-export async function loadProvider(issuer) {
-  const response = await fetch(`${issuer}/.well-known/openid-configuration`);
-  if (!response.ok) throw new Error(`OIDC discovery gagal (${response.status})`);
-  return response.json();
+export async function completeLogin(config, url, transaction) {
+  let stage = 'callback.token-validation';
+  try {
+    const tokens = await oidc.authorizationCodeGrant(config, url, {
+      expectedState: transaction.state,
+      expectedNonce: transaction.nonce,
+      pkceCodeVerifier: transaction.codeVerifier,
+      idTokenExpected: true
+    });
+    const claims = tokens.claims();
+    stage = 'callback.userinfo';
+    const user = await oidc.fetchUserInfo(config, tokens.access_token, claims.sub);
+    return { user, accessToken: tokens.access_token, idToken: tokens.id_token, expiresIn: tokens.expiresIn() };
+  } catch (error) {
+    error.stage = stage;
+    throw error;
+  }
 }
 
-export function endSessionUrl(provider, idToken) {
-  if (!provider.end_session_endpoint) throw new Error('Provider tidak menyediakan endpoint logout OIDC');
-  const url = new URL(provider.end_session_endpoint);
-  if (idToken) url.searchParams.set('id_token_hint', idToken);
-  return url.toString();
-}
+export { oidc };
