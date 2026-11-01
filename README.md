@@ -7,7 +7,7 @@ Repositori ini berisi contoh integrasi PNJ ID menggunakan Authorization Code + P
 Nama direktori menunjukkan **peran dalam flow OIDC**, bukan aturan bahwa setiap bahasa atau platform harus memiliki frontend dan backend:
 
 - `Frontend/<bahasa>` berisi contoh **client app** yang memulai login, menerima callback, menukar authorization code dengan token, mengambil UserInfo, dan memakai access token untuk memanggil API. Pada contoh Node.js, access token disimpan di server-side session sehingga tidak dikirim ke JavaScript di browser.
-- `Backend/<bahasa>` berisi contoh **resource server/API** yang menerima Bearer access token. API akan memverifikasi JWT melalui JWKS atau opaque token melalui CAS introspection, lalu memastikan token memiliki scope `test.read` sebelum mengembalikan data.
+- `Backend/<bahasa>` berisi contoh **resource server/API** yang menerima Bearer access token. API akan memverifikasi JWT melalui JWKS atau opaque token melalui endpoint introspection OIDC, lalu memastikan token memiliki scope `test.read` sebelum mengembalikan data.
 
 Contoh bahasa atau platform baru cukup ditempatkan berdasarkan perannya. Aplikasi web, mobile, desktop, atau CLI yang menangani login termasuk client app meskipun tidak memiliki "frontend". Setiap contoh juga tidak wajib memiliki kedua bagian: client app dapat langsung memanggil API PNJ, sedangkan resource server dapat dipakai oleh client mana pun.
 
@@ -41,18 +41,20 @@ npm run dev
 
 Buka <http://localhost:5173>, lalu pilih **Masuk dengan PNJ ID**.
 
-Konfigurasi default sudah sesuai dengan CAS service yang digunakan oleh contoh ini. Salin `.env.example` hanya jika nilainya perlu diubah, lalu load environment variables menggunakan cara yang tersedia di sistem Anda.
+Konfigurasi default sudah sesuai dengan provider OIDC yang digunakan oleh contoh ini. Salin `.env.example` hanya jika nilainya perlu diubah, lalu load environment variables menggunakan cara yang tersedia di sistem Anda.
 
 ## Alur masuk dan akses API
 
-Sebagai gambaran, alur CAS berbasis ticket berjalan seperti berikut:
+Alur OIDC Authorization Code + PKCE berjalan seperti berikut:
 
 ```text
-Browser ──► Client ──► CAS Login
-   ▲                      │
-   └──── ticket ──────────┘
-   │
-Client ── serviceValidate ──► CAS
+Browser ── login ──► Client app ── redirect + PKCE ──► PNJ ID
+   ▲                                                    │
+   └──── callback + authorization code ─────────────────┘
+                            │
+Client app ── code + verifier ──► token endpoint PNJ ID
+   ▲                                      │
+   └──────────── token ───────────────────┘
    │
    └── session lokal ──► Browser
 ```
