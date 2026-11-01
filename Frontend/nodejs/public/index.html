@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="color-scheme" content="light">
+    <title>Contoh integrasi PNJ ID</title>
+    <link rel="stylesheet" href="/styles.css">
+    <script src="/app.js" defer></script>
+  </head>
+  <body>
+    <header>
+      <a href="/">PNJ ID Example</a>
+    </header>
+    <main id="main-content">
+      <section aria-labelledby="page-title">
+        <h1 id="page-title">Contoh integrasi OIDC</h1>
+        <p>Masuk dengan PNJ ID, lihat profil, lalu uji akses API.</p>
+
+        <div id="loading" class="state" role="status">Memeriksa sesi masuk...</div>
+        <div id="error" class="state error" role="alert" hidden></div>
+        <div id="signed-out" class="state" hidden>
+          <p>Belum ada sesi aktif. Masuk untuk melihat data profil dari PNJ ID.</p>
+          <a class="button primary" href="/auth/login">Masuk dengan PNJ ID</a>
+        </div>
+        <div id="signed-in" class="state" hidden>
+          <p class="status">Sesi aktif</p>
+          <h2 id="user-name">Pengguna PNJ</h2>
+          <dl id="profile"></dl>
+          <div class="actions">
+            <button id="test-read" class="button primary" type="button">Lihat data test.read</button>
+            <button id="check-backend" class="button secondary" type="button">Periksa akses backend</button>
+            <button id="logout" class="button secondary" type="button">Keluar</button>
+          </div>
+          <pre id="backend-result" tabindex="0" hidden></pre>
+        </div>
+      </section>
+    </main>
+    <footer>Scope: openid profile email test.read</footer>
+  </body>
+</html>

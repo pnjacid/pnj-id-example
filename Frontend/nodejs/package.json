@@ -1,0 +1,8 @@
+{
+  "name": "pnj-id-example-frontend",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "node --env-file=.env.dev --watch server.js"
+  }
+}
